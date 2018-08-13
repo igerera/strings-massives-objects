@@ -52,3 +52,18 @@ section.font-token-minimize pre.line-numbers  {
 	text-transform: lowercase;
 	letter-spacing: 2px;
 }
+
+
+/*Добавил, чтобы убрать пагинацию со слайда с автором*/
+section#author.slide.author::after {
+  display: none;
+}
+
+.schmutz-titel {
+	padding: 0;
+}
+
+.schmutz-picture {
+	width: 1024px;
+ height: 640px;
+}

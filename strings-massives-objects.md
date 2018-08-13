@@ -7,9 +7,9 @@
 + Строки
 + Списки
 + Массивы
-+ Ресурсы
-+ Объекты
 + NULL
++ Ресурсы
+
 
 ---
 
@@ -138,7 +138,7 @@ string ltrim (string $str [, string $character_mask ])
 
 string nl2br (string $string [, bool $is_xhtml = true ])
 
-Возвращает строку string, в которой перед каждым переводом строки (\r\n, \n\r, \n и \r) вставлен '<br />' или '<br>'.
+Возвращает строку string, в которой перед каждым переводом строки (\r\n, \n\r, \n и \r) вставлен `<br />` или `<br>`.
 
 ---
 
@@ -651,194 +651,6 @@ array array_column (array $input, mixed $column_key [, mixed $index_key = null ]
 
 ---
 
-## Ресурсы
-
-![](https://i.imgur.com/hy5HEGh.jpg)
-
----
-
-### Ресурсы — это
-
->  специальный тип данных, содержащий в себе указатель на внешний ресурс (открытый файл, соединение с БД, картинку и т.п.)
-
-В своих приложениях, мы получаем ресурсы как результаты тех или иных функций, записываем их в переменную, и затем используем эту переменную, когда требуется обращение к внешним данным.
-
----
-
-### Получаем и используем ресурсы
-
-```php
-$f = fopen("file.txt", "r");
-$string = fread($f, 1024); // $f — указывает на открытый нами файл
-```
-
-```php
-$link = mysqli_connect('localhost', 'my_user', 'my_password', 'my_db');
-$query = "SELECT * FROM `table` WHERE `";
-$result = mysqli_result($link, $query); 
-// $link указывает на установленное с БД соединение
-```
-
-Список ресурсов (для смелых): http://php.net/manual/ru/resource.php
-
----
-
-### Работа  с  файлами
-
-Чтение  из  файла,  запись  в  файл
-
----
-
-#### fopen
-
-resource fopen (string $filename, string $mode [, bool $use_include_path = false [, resource $context ]])
-
-Открывает  файл  в  режиме  mode,  и  возвращает  указатель  на  открытый  файл. 
-
-Режимы:
-+ 'r'  -  Открывает  файл  только  для  чтения;  помещает  указатель  в  начало  файла.
-+ 'w'  -  Открывает  файл  только  для  записи;  помещает  указатель  в  начало  файла  и  обрезает  файл  до  нулевой  длины.  Если  файл  не  существует  -  пробует  его  создать.
-
-Подробнее: http://php.net/manual/ru/function.fopen.php
-
----
-
-#### Чтение  из  файла
-
-string fread (resource $handle, int $length)
-
-fread()  читает  до  length  байт  из  файлового  указателя  handle.
-
-```php
-//  получает  содержимое  файла  в  строку
-$filename  = "/usr/local/something.txt";
-$handle  =  fopen($filename,  "r");
-$contents  =  fread($handle,  filesize($filename));
-fclose($handle);
-```
-
-string fgets (resource $handle [, int $length ])
-
-Читает  файл  построчно
-
-```php
-$filename  = "/usr/local/something.txt";
-$handle  =  fopen($filename,  "r");
-$contents  =  '';
-while($row  =  fgets($handle)){
-    $contents  .=  $row;
-}
-```
-
----
-
-#### Запись  в  файл
-
-int fwrite (resource $handle, string $string [, int $length ])
-
-fwrite()  записывает  содержимое  string  в  файловый  поток  handle.  Если  передан  аргумент  length,  запись  остановится  после  того,  как  length  байтов  будут  записаны  или  будет  достигнут  конец  строки  string,  смотря  что  произойдёт  первым.
-
-fputs()  -  псевдоним  функции  fwrite  (делает  тоже  самое)
-
----
-
-#### fseek
-
-int fseek (resource $handle, int $offset [, int $whence = SEEK_SET ])
-
-Устанавливает  смещение  в  файле,  на  который  ссылается  handle.  Новое  смещение,  измеряемое  в  байтах  от  начала  файла,  получается  путём  прибавления  параметра  offset  к  позиции,  указанной  в  параметре  whence.  В  случае  успеха  возвращает  0;  в  противном  случае  возвращает  -1.
-
----
-
-#### ftell
-
-int ftell (resource $handle)
-
-Возвращает  позицию  файлового  указателя  handle. 
-
----
-
-#### feof
-
-bool feof (resource $handle)
-
-Проверяет,  достигнут  ли  конец  файла. 
-
----
-
-#### fclose
-
-bool fclose (resource $handle)
-
-Функция  закрывает  файл,  на  который  указывает  дескриптор  handle. 
-
----
-
-### Быстрые  функции  чтения/записи
-
----
-
-#### file_get_contents
-
-string file_get_contents (string $filename [, bool $use_include_path = false [, resource $context [, int $offset = -1 [, int $maxlen ]]]])
-
-Читает  содержимое  файла  (или  URL)  в  строку
-
----
-
-#### file_put_contents
-
-int file_put_contents (string $filename, mixed $data [, int $flags = 0 [, resource $context ]])
-
-Функция  идентична  последовательным  успешным  вызовам  функций  fopen(),  fwrite()  и  fclose(). 
-
----
-
-## Объекты
-
-![](https://i.imgur.com/o7FOMgY.png)
-
----
-
-### Объект - это
-
-> структура, содержащая в себе данные и функции для работы с этими данными.
-
-Класс — это шаблон, описывающий будущие объекты.
-
-Созданные на основе класса объекты независимы друг от друга, живут своей жизнью, изменения в одном объекте не влияют на изменения в другом.
-
----
-
-### Объявление класса
-
-```php
-class Car {
-    var $brand;
-    var $model;
-    var $year;
-    var $speed;
-   
-    function start() {
-        if ($this->speed === 0)
-            $this->speed = 10; // $this - этот  объект
-    }
-}
-```
-
----
-
-### Использование объекта
-
-```php
-$mercedes = new Car(); // создание объекта
-$mercedes->brand = "Mercedes"; // установка свойств
-$mercedes->start(); // обращение к методу класса
-echo $mercedes->speed; // 10
-```
-
----
-
 ## NULL
 
 ![](https://i.imgur.com/Sn98Os8.png)
@@ -861,3 +673,42 @@ echo $mercedes->speed; // 10
 + она была удалена с помощью unset
 
 NULL — хороший способ сообщить о том, что что-то пошло не так. 
+
+---
+
+## Ресурсы
+
+![](https://i.imgur.com/hy5HEGh.jpg)
+
+---
+
+### Ресурсы — это
+
+>  специальный тип данных, содержащий в себе указатель на внешний ресурс (открытый файл, соединение с БД, картинку и т.п.)
+
+В своих приложениях, мы получаем ресурсы как результаты тех или иных функций, записываем их в переменную, и затем используем эту переменную, когда требуется обращение к внешним данным.
+
+---
+
+### Получаем и используем ресурсы
+
+```php
+try {
+  $dbh = new PDO($dsn, $user, $password);
+} catch (PDOException $e) {
+  echo 'Подключение не удалось: ' . $e->getMessage();
+}
+$sth = $dbh->prepare("SELECT name, colour FROM fruit");
+$sth->execute();
+$result = $sth->fetch(PDO::FETCH_ASSOC);
+print_r($result);
+print("\n");
+```
+
+---
+
+### В будущих лекциях ресурсы будут рассмотрены подробнее
+
+Список ресурсов (для смелых): http://php.net/manual/ru/resource.php
+
+---
