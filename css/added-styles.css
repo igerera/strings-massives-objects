@@ -1,0 +1,111 @@
+/*Стили для презентации "Строки, массивы и объекты". Тема ribbon*/
+
+/*Светло-серая подсветка имён элементов*/
+/*Основной текст*/
+mark.highlighter {
+	background: rgba(27,31,35,0.05);
+	border-radius: 3px;
+	color: #666666;
+}
+
+/*Прочее*/
+/*Line-height в абзацах, чтобы подсвеченные элементы не соприкасались нижними и верхними границами*/
+.slide p {
+	margin-bottom: 1em;
+	line-height: 1.6em;
+}
+
+span, pre.line-numbers {
+  font-size: 17px;
+}
+
+/*Line-height в списках, чтобы подсвеченные элементы не соприкасались нижними и верхними границами*/
+.slide ul li,
+.slide ol li  {
+	line-height: 1.6em;
+}
+
+/*Заголовки разделов*/
+h2.slide-caption{
+	padding-top: 1.5em;
+	font-size: 3.5em;
+}
+
+/*Подзголовок*/
+.subtitle {
+	text-transform: none;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+/*Дополнительный пробел*/
+.gap-50 {
+	width: 5px;
+	height: 50px;
+}
+
+/*Уменьшение межбуквенного интервала*/
+.letter-compressed {
+	letter-spacing: -1px;
+}
+
+/*Нижний регистр*/
+.lowercase {
+	text-transform: lowercase;
+	letter-spacing: 2px;
+}
+
+
+/*Добавил, чтобы убрать пагинацию со слайда с автором*/
+section#author.slide.author::after {
+  display: none;
+}
+
+/*Шмуц для раздела*/
+.schmutz-titel {
+	padding: 0;
+}
+
+/*Картинка в шмуце*/
+.schmutz-picture {
+	width: 1024px;
+ height: 640px;
+}
+
+/*Окрашивает строку в коде*/
+.color-string {
+	color: #690;
+}
+
+/*Уменьшение шрифта*/
+.minimize {
+	font-size: 0.8em;
+}
+
+/*Блок ответа с боковой планкой*/
+.answer {
+	display: block;
+	padding-left: 25px;
+	border-left: 7px solid;
+	border-left-color: rgba(27, 31, 35, 0.05);
+	color: #979a9e;
+}
+
+/*Выделение текста, чтобы обратить внимание*/
+.attention {
+	color: #F00;
+	font-size: 1em;
+}
+
+/*Выделяет рамкой фрагмент текста*/
+.frame {
+	display: inline-block;
+	border: 1px solid black;
+	font-size: 1em;
+}
+
+.chapter-small {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
