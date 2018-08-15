@@ -230,7 +230,7 @@ int mb_strrpos (string $haystack, string $needle [, int $offset = 0 [, string $e
 
 #### str_replace
 
-mixed str_replace (mixed $search, mixed $replace, mixed $subject [, int &$count ])
+mixed str_replace (mixed $search, mixed $replace, mixed $subject [, int &count ])
 
 Эта  функция  возвращает  строку  или  массив,  в  котором  все  вхождения  search  в  subject  заменены  на  replace.  Если  search  и  replace  -  массивы,  то  str_replace()  использует  каждое  значение  из  соответствующего  массива  для  поиска  и  замены  в  subject.  Если  в  массиве  replace  меньше  элементов,  чем  в  search,  в  качестве  строки  замены  для  оставшихся  значений  будет  использована  пустая  строка.  Если  search  -  массив,  а  replace  -  строка,  то  эта  строка  замены  будет  использована  для  каждого  элемента  массива  search. 
 
