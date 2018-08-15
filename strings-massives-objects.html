@@ -60,620 +60,619 @@
       </ol>
   </section>
 
-<section class="slide chapter schmutz-titel">
-  <img src="pic/1.strings.png" class="schmutz-picture" alt="">
-</section>
-
-<section class="slide chapter" id="strings">
+  <section class="slide chapter" id="strings">
     <h2>Строки</h2>
-</section>
-  
-<section class="slide">
-    <h2>Объявление  строк</h2>
-    <pre><code class="language-php line-numbers">
-      $a = 'Строка  в  одинарных  кавычках';
-      $b = "В двойных кавычках появляется возможность использовать<br> переменные вот так: $a";
-      $c = "Или так: {$b}";
-      $d = &lt;&lt;&lt;PHP 
-      <span class="color-string">Длинную строку удобно объявить вот таким способом,<br> особенно, если в ней используются оба типа кавычек</span> PHP;
-    </code></pre>
-</section>
+  </section>
 
-<section class="slide">
-    <h2>Операции над строками</h2>
-    <ul>
-      <li>Склеивание (конкатенация)</li>
+  <section class="slide chapter schmutz-titel">
+    <img src="pic/1.strings.png" class="schmutz-picture" alt="">
+  </section>
+
+  <section class="slide">
+      <h2>Объявление  строк</h2>
+      <pre><code class="language-php line-numbers">
+        $a = 'Строка  в  одинарных  кавычках';
+        $b = "В двойных кавычках появляется возможность использовать<br> переменные вот так: $a";
+        $c = "Или так: {$b}";
+        $d = &lt;&lt;&lt;PHP 
+        <span class="color-string">Длинную строку удобно объявить вот таким способом,<br> особенно, если в ней используются оба типа кавычек</span> PHP;
+      </code></pre>
+  </section>
+
+  <section class="slide">
+      <h2>Операции над строками</h2>
+      <ul>
+        <li>Склеивание (конкатенация)</li>
+      </ul>
+      <pre><code class="language-php">$a = "38" . 'попугаев'; // 38 попугаев</code></pre>
+      <ul>
+        <li>Сравнение</li>
+      </ul>
+      <pre><code class="language-php">
+        $result = "а" > "Я"; // true
+        $result = "а" > "я"; // false
+      </code></pre>
+  </section>
+    
+  <section class="slide">
+    <h2></h2>
+    <p>При нестрогом (==) сравнении интерпретатор пытается привести строки к числам!</p>
+    <p>При произведении арифметических операций первые символы строки будут приведены, по возможности, к числу, остальные — отброшены.</p>
+    <pre><code class="language-php">
+      $sum = "38попугаев" + "1 крылышко 3333"; // 39
+    </code></pre>
+  </section>
+
+  <section class="slide chapter-small">
+    <h2>Преобразование строк</h2>
+  </section>
+
+  <section class="slide">
+    <h2>substr/mb_substr</h2>
+    <p>string substr (string $string, int $start [, int $length ])<br>
+    string mb_substr (string $str, int $start [, int $length = NULL [, string $encoding = mb_internal_encoding() ]])</p>
+    <p class="minimize">Если start неотрицателен, возвращаемая подстрока начинается с позиции start от начала строки, считая от нуля. Например, в строке 'abcdef', в позиции 0 находится символ 'a', в позиции 2 — символ 'c', и т.д. Если  start отрицательный, возвращаемая подстрока начинается с позиции, отстоящей на start символов от конца строки string.</p>
+  </section>
+
+  <section class="slide">
+    <h2>str_pad</h2>
+    <p>string str_pad (string $input, int $pad_length [, string $pad_string = " " [, int $pad_type = STR_PAD_RIGHT ]])</p>
+    <p class="minimize">Эта функция возвращает строку input, дополненную слева, справа или с обеих сторон<br> до заданной длины. Если необязательный аргумент pad_string не передан, то input будет дополнен пробелами, иначе он будет дополнен символами из pad_string до нужной длины.</p>
+  </section>
+
+  <section class="slide">
+    <h2>str_repeat</h2>
+    <p>string str_repeat (string $input, int $multiplier)</p>
+    <p class="minimize">Возвращает строку input, повторенную multiplier раз. multiplier должен быть больше<br> или равен нулю. Если он равен нулю, возвращается пустая строка.</p>
+  </section>
+
+  <section class="slide">
+    <h2>str_shuffle</h2>
+    <p>string str_shuffle (string $str)</p>
+    <p>str_shuffle() перемешивает символы в строке. Выбирается одна возможная перестановка из всех возможных.</p>
+  </section>
+
+  <section class="slide">
+    <h2>strrev</h2>
+    <p>string strrev (string $string)</p>
+    <p class="minimize">Возвращает строку string, перевернутую задом наперед.</p>
+  </section>
+
+  <section class="slide chapter-small">
+    <h2>Работа с пробельными символами</h2>
+  </section>
+
+  <section class="slide">
+    <h2>trim</h2>
+    <p>string trim (string $str [, string $character_mask = " \t\n\r\0\x0B" ])</p>
+    <p class="minimize">Эта функция возвращает строку str с удаленными из начала и конца строки пробелами.<br> Если второй параметр не передан, trim() удаляет следующие символы:</p>
+    <ul class="minimize">
+      <li>" " (ASCII 32 (0x20)), обычный пробел</li>
+      <li>"\t" (ASCII 9 (0x09)), символ  табуляции</li>
+      <li>"\n" (ASCII 10 (0x0A)), символ перевода строки</li>
+      <li>"\r" (ASCII 13 (0x0D)), символ возврата каретки</li>
+      <li>"\0" (ASCII 0 (0x00)), NUL-байт</li>
+      <li>"\x0B" (ASCII 11 (0x0B)), вертикальная табуляция</li>
     </ul>
-    <pre><code class="language-php">$a = "38" . 'попугаев'; // 38 попугаев</code></pre>
+  </section>
+
+  <section class="slide">
+    <h2>rtrim/ltrim</h2>
+    <p>string rtrim (string $str [, string $character_mask ])</p>
+    <p class="minimize">Эта функция возвращает строку str с удаленными из конца строки пробелами.</p>
+    <p>string ltrim (string $str [, string $character_mask ])</p>
+    <p class="minimize">Удаляет пробелы (или другие символы) из начала строки.</p>
+  </section>
+
+  <section class="slide">
+    <h2>nl2br</h2>
+    <p>string nl2br (string $string [, bool $is_xhtml = true ])</p>
+    <p class="minimize">Возвращает строку string, в которой перед каждым переводом строки (\r\n, \n\r, \n и \r) вставлен <mark class="highlighter">&lt;br /&gt;</mark> или <mark class="highlighter">&lt;br&gt;</mark>.</p>
+  </section>
+
+  <section class="slide chapter-small">
+    <h2>Работа с регистром символов</h2>
+  </section>
+
+  <section class="slide">
+    <h2>strtolower/mb_strtolower</h2>
+    <p>string strtolower (string $string)</p>
+    <p class="minimize">Возвращает строку string, в которой все буквенные символы переведены в нижний регистр.</p>
+    <p>string mb_strtolower (string $str [, string $encoding = mb_internal_encoding() ])</p>
+    <p class="minimize">В отличие от strtolower(), то что символ является буквой определяется на основании свойств символа Юникода. Таким образом на поведение функции не влияют региональные настройки системы, а также функция может преобразовывать символы, имеющие буквенные особенности, такие как А-умляут (Ä).</p>
+  </section>
+
+  <section class="slide">
+    <h2>strtoupper/mb_strtoupper</h2>
+    <p>string strtoupper (string $string)</p>
+    <p class="minimize">Возвращает строку string, в которой все буквенные символы переведены в верхний регистр.</p>
+    <p>string mb_strtoupper (string $str [, string $encoding = mb_internal_encoding() ])</p>
+    <p class="minimize">В отличие от strtoupper(), то что символ является буквой определяется на основании свойств символа Юникода. Таким образом на поведение функции не влияют региональные настройки системы, а также функция может преобразовывать символы, имеющие буквенные особенности, такие как А-умляут (Ä).</p>
+  </section>
+
+  <section class="slide">
+    <h2>lcfirst/ucfirst</h2>
+    <p>string lcfirst (string $str)</p>
+    <p class="minimize">Возвращает строку str, первый символ которой был преобразован в нижний регистр,<br> если этот символ является буквой.</p>
+    <p>string ucfirst (string $str)</p>
+    <p class="minimize">Возвращает строку str, в которой первый символ переведен в верхний регистр,<br> если этот символ является буквой.</p>
+  </section>
+
+  <section class="slide">
+    <h2>ucwords</h2>
+    <p>string ucwords (string $str)</p>
+    <p class="minimize">Возвращает строку str, в которой первый символ каждого слова переведен в верхний регистр, если этот символ является буквой. Эта функция считает словами последовательности символов, разделенных пробельными символами, которыми являются пробел, разрыв страницы, перевод строки, возврат каретки, горизонтальная и вертикальная табуляция.</p>
+  </section>
+
+  <section class="slide">
+    <h2>mb_convert_case</h2>
+    <p>string mb_convert_case (string $str, int $mode [, string $encoding = mb_internal_encoding() ])</p>
+    <p class="minimize">Производит смену регистра символов в строке string в соответствии с режимом mode.<br> Это может быть одна из констант MB_CASE_UPPER, MB_CASE_LOWER или MB_CASE_TITLE.<br> В отличие от стандартных функций смены регистра, вроде strtolower() и strtoupper(),<br> смена регистра осуществляется на основе свойств символа Юникода.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Работа с кодировкой строк — iconv</h2>
+    <p>string iconv (string $in_charset, string $out_charset, string $str)</p>
+    <p class="minimize">Преобразует набор символов строки str из кодировки in_charset в out_charset.</p>
+  </section>
+
+  <section class="slide chapter-small">
+    <h2>Поиск и замена символов в строке</h2>
+  </section>
+
+  <section class="slide">
+    <h2>strpos</h2>
+    <p>mixed strpos (string $haystack, mixed $needle [, int $offset = 0 ])<br>
+    int mb_strpos ( string $haystack, string $needle [, int $offset = 0 [, string $encoding = mb_internal_encoding() ]])</p>
+    <p class="minimize">Ищет  позицию  первого  вхождения  подстроки  needle  в  строку  haystack.  Если  needle<br>  не  является  строкой,  он  приводится  к  целому  и  трактуется  как  код  символа. Если  offset  указан,  то  поиск  будет  начат  с  указанного  количества  символов  с  начала  строки.<br>  В  отличие  от  strrpos()  и  strripos()  данный  параметр  не  может  быть  отрицательным.</p>
+  </section>
+
+  <section class="slide">
+    <h2>strrpos</h2>
+    <p>int strrpos (string $haystack, string $needle [, int $offset = 0 ])</p>
+    <p>int mb_strrpos (string $haystack, string $needle [, int $offset = 0 [, string $encoding = mb_internal_encoding() ]])</p>
+    <p class="minimize">Ищет  позицию  последнего  вхождения  подстроки  needle  в  строку  haystack.  Если  указан  offset,  то  поиск  начнется  с  данного  количества  символов  с  начала  строки.  Если  передано  отрицательное  значение,  поиск  начнется  с  указанного  количества  символов  от  конца  строки,  но  по  прежнему  будет  производится  поиск  последнего  вхождения.</p>
+  </section>
+
+  <section class="slide">
+    <h2>str_replace</h2>
+    <p>mixed str_replace (mixed $search, mixed $replace, mixed <span class="frame">$subject [, int &</span>count ])</p>
+    <p class="minimize">Эта  функция  возвращает  строку  или  массив,  в  котором  все  вхождения  search  в  subject  заменены  на  replace.  Если  search  и  replace  —  массивы,  то  str_replace()  использует  каждое  значение  из  соответствующего  массива  для  поиска  и  замены  в  subject.  Если  в  массиве  replace  меньше  элементов,  чем  в  search,  в  качестве  строки  замены  для  оставшихся  значений  будет  использована  пустая  строка.  Если  search  —  массив,  а  replace  —  строка,  то  эта  строка  замены  будет  использована  для  каждого  элемента  массива  search. </p>
+  </section>
+
+  <section class="slide">
+    <h2>strlen/mb_strlen</h2>
+    <p>int strlen (string $string)<br>
+    mixed mb_strlen (string $str [, string $encoding = mb_internal_encoding() ])</p>
+    <p class="minimize">Возвращает  длину  строки  string.  mb_strlen()  Возвращает  FALSE,  если  передан  недопустимый  параметр  encoding.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Полный  список функций для работы со строками</h2>
+    <a href="http://php.net/manual/ru/ref.strings.php">http://php.net/manual/ru/ref.strings.php</a>
+  </section>
+
+  <section class="slide chapter" id="lists">
+    <h2>Списки</h2>
+  </section>
+
+  <section class="slide schmutz-titel">
+    <img src="pic/2.lists.png" class="schmutz-picture" alt="">
+  </section>
+
+  <section class="slide">
+    <h2></h2>
+    <p class="subtitle">Список  —  это  ловкий  способ  сделать  несколько  присваиваний  за  один  раз</p>
+    <pre><code class="language-php">
+      $row = mysqli_fetch_row($link, $result);
+      list($id, $title) = $row; // $id = $row[0], $title = $row[1]
+    </code></pre>
+  </section>
+
+  <section class="slide chapter" id="massives">
+    <h2>Массивы</h2>
+  </section>
+
+  <section class="slide schmutz-titel">
+    <img src="pic/3.massives.png" class="schmutz-picture" alt="">
+  </section>
+
+  <section class="slide">
+    <h2>Объявление  массива</h2>
     <ul>
-      <li>Сравнение</li>
+      <li>«Старый» способ</li>
     </ul>
     <pre><code class="language-php">
-      $result = "а" > "Я"; // true
-      $result = "а" > "я"; // false
+      $eggs = array("egg1", "egg2", "egg3"); 
+      // $eggs[0] == "egg1", $eggs[1] == "egg2", etc...
     </code></pre>
-</section>
-  
-<section class="slide">
-  <h2></h2>
-  <p>При нестрогом (==) сравнении интерпретатор пытается привести строки к числам!</p>
-  <p>При произведении арифметических операций первые символы строки будут приведены, по возможности, к числу, остальные — отброшены.</p>
-  <pre><code class="language-php">
-    $sum = "38попугаев" + "1 крылышко 3333"; // 39
-  </code></pre>
-</section>
-
-<section class="slide chapter-small">
-  <h2>Преобразование строк</h2>
-</section>
-
-<section class="slide">
-  <h2>substr/mb_substr</h2>
-  <p>string substr (string $string, int $start [, int $length ])<br>
-  string mb_substr (string $str, int $start [, int $length = NULL [, string $encoding = mb_internal_encoding() ]])</p>
-  <p class="minimize">Если start неотрицателен, возвращаемая подстрока начинается с позиции start от начала строки, считая от нуля. Например, в строке 'abcdef', в позиции 0 находится символ 'a', в позиции 2 — символ 'c', и т.д. Если  start отрицательный, возвращаемая подстрока начинается с позиции, отстоящей на start символов от конца строки string.</p>
-</section>
-
-<section class="slide">
-  <h2>str_pad</h2>
-  <p>string str_pad (string $input, int $pad_length [, string $pad_string = " " [, int $pad_type = STR_PAD_RIGHT ]])</p>
-  <p class="minimize">Эта функция возвращает строку input, дополненную слева, справа или с обеих сторон<br> до заданной длины. Если необязательный аргумент pad_string не передан, то input будет дополнен пробелами, иначе он будет дополнен символами из pad_string до нужной длины.</p>
-</section>
-
-<section class="slide">
-  <h2>str_repeat</h2>
-  <p>string str_repeat (string $input, int $multiplier)</p>
-  <p class="minimize">Возвращает строку input, повторенную multiplier раз. multiplier должен быть больше<br> или равен нулю. Если он равен нулю, возвращается пустая строка.</p>
-</section>
-
-<section class="slide">
-  <h2>str_shuffle</h2>
-  <p>string str_shuffle (string $str)</p>
-  <p>str_shuffle() перемешивает символы в строке. Выбирается одна возможная перестановка из всех возможных.</p>
-</section>
-
-<section class="slide">
-  <h2>strrev</h2>
-  <p>string strrev (string $string)</p>
-  <p class="minimize">Возвращает строку string, перевернутую задом наперед.</p>
-</section>
-
-<section class="slide chapter-small">
-  <h2>Работа с пробельными символами</h2>
-</section>
-
-<section class="slide">
-  <h2>trim</h2>
-  <p>string trim (string $str [, string $character_mask = " \t\n\r\0\x0B" ])</p>
-  <p class="minimize">Эта функция возвращает строку str с удаленными из начала и конца строки пробелами.<br> Если второй параметр не передан, trim() удаляет следующие символы:</p>
-  <ul class="minimize">
-    <li>" " (ASCII 32 (0x20)), обычный пробел</li>
-    <li>"\t" (ASCII 9 (0x09)), символ  табуляции</li>
-    <li>"\n" (ASCII 10 (0x0A)), символ перевода строки</li>
-    <li>"\r" (ASCII 13 (0x0D)), символ возврата каретки</li>
-    <li>"\0" (ASCII 0 (0x00)), NUL-байт</li>
-    <li>"\x0B" (ASCII 11 (0x0B)), вертикальная табуляция</li>
-  </ul>
-</section>
-
-<section class="slide">
-  <h2>rtrim/ltrim</h2>
-  <p>string rtrim (string $str [, string $character_mask ])</p>
-  <p class="minimize">Эта функция возвращает строку str с удаленными из конца строки пробелами.</p>
-  <p>string ltrim (string $str [, string $character_mask ])</p>
-  <p class="minimize">Удаляет пробелы (или другие символы) из начала строки.</p>
-</section>
-
-<section class="slide">
-  <h2>nl2br</h2>
-  <p>string nl2br (string $string [, bool $is_xhtml = true ])</p>
-  <p class="minimize">Возвращает строку string, в которой перед каждым переводом строки (\r\n, \n\r, \n и \r) вставлен <mark class="highlighter">&lt;br /&gt;</mark> или <mark class="highlighter">&lt;br&gt;</mark>.</p>
-</section>
-
-<section class="slide chapter-small">
-  <h2>Работа с регистром символов</h2>
-</section>
-
-<section class="slide">
-  <h2>strtolower/mb_strtolower</h2>
-  <p>string strtolower (string $string)</p>
-  <p class="minimize">Возвращает строку string, в которой все буквенные символы переведены в нижний регистр.</p>
-  <p>string mb_strtolower (string $str [, string $encoding = mb_internal_encoding() ])</p>
-  <p class="minimize">В отличие от strtolower(), то что символ является буквой определяется на основании свойств символа Юникода. Таким образом на поведение функции не влияют региональные настройки системы, а также функция может преобразовывать символы, имеющие буквенные особенности, такие как А-умляут (Ä).</p>
-</section>
-
-<section class="slide">
-  <h2>strtoupper/mb_strtoupper</h2>
-  <p>string strtoupper (string $string)</p>
-  <p class="minimize">Возвращает строку string, в которой все буквенные символы переведены в верхний регистр.</p>
-  <p>string mb_strtoupper (string $str [, string $encoding = mb_internal_encoding() ])</p>
-  <p class="minimize">В отличие от strtoupper(), то что символ является буквой определяется на основании свойств символа Юникода. Таким образом на поведение функции не влияют региональные настройки системы, а также функция может преобразовывать символы, имеющие буквенные особенности, такие как А-умляут (Ä).</p>
-</section>
-
-<section class="slide">
-  <h2>lcfirst/ucfirst</h2>
-  <p>string lcfirst (string $str)</p>
-  <p class="minimize">Возвращает строку str, первый символ которой был преобразован в нижний регистр,<br> если этот символ является буквой.</p>
-  <p>string ucfirst (string $str)</p>
-  <p class="minimize">Возвращает строку str, в которой первый символ переведен в верхний регистр,<br> если этот символ является буквой.</p>
-</section>
-
-<section class="slide">
-  <h2>ucwords</h2>
-  <p>string ucwords (string $str)</p>
-  <p class="minimize">Возвращает строку str, в которой первый символ каждого слова переведен в верхний регистр, если этот символ является буквой. Эта функция считает словами последовательности символов, разделенных пробельными символами, которыми являются пробел, разрыв страницы, перевод строки, возврат каретки, горизонтальная и вертикальная табуляция.</p>
-</section>
-
-<section class="slide">
-  <h2>mb_convert_case</h2>
-  <p>string mb_convert_case (string $str, int $mode [, string $encoding = mb_internal_encoding() ])</p>
-  <p class="minimize">Производит смену регистра символов в строке string в соответствии с режимом mode.<br> Это может быть одна из констант MB_CASE_UPPER, MB_CASE_LOWER или MB_CASE_TITLE.<br> В отличие от стандартных функций смены регистра, вроде strtolower() и strtoupper(),<br> смена регистра осуществляется на основе свойств символа Юникода.</p>
-</section>
-
-<section class="slide">
-  <h2>Работа с кодировкой строк — iconv</h2>
-  <p>string iconv (string $in_charset, string $out_charset, string $str)</p>
-  <p class="minimize">Преобразует набор символов строки str из кодировки in_charset в out_charset.</p>
-</section>
-
-<section class="slide chapter-small">
-  <h2>Поиск и замена символов в строке</h2>
-</section>
-
-<section class="slide">
-  <h2>strpos</h2>
-  <p>mixed strpos (string $haystack, mixed $needle [, int $offset = 0 ])<br>
-  int mb_strpos ( string $haystack, string $needle [, int $offset = 0 [, string $encoding = mb_internal_encoding() ]])</p>
-  <p class="minimize">Ищет  позицию  первого  вхождения  подстроки  needle  в  строку  haystack.  Если  needle<br>  не  является  строкой,  он  приводится  к  целому  и  трактуется  как  код  символа. Если  offset  указан,  то  поиск  будет  начат  с  указанного  количества  символов  с  начала  строки.<br>  В  отличие  от  strrpos()  и  strripos()  данный  параметр  не  может  быть  отрицательным.</p>
-</section>
-
-<section class="slide">
-  <h2>strrpos</h2>
-  <p>int strrpos (string $haystack, string $needle [, int $offset = 0 ])</p>
-  <p>int mb_strrpos (string $haystack, string $needle [, int $offset = 0 [, string $encoding = mb_internal_encoding() ]])</p>
-  <p class="minimize">Ищет  позицию  последнего  вхождения  подстроки  needle  в  строку  haystack.  Если  указан  offset,  то  поиск  начнется  с  данного  количества  символов  с  начала  строки.  Если  передано  отрицательное  значение,  поиск  начнется  с  указанного  количества  символов  от  конца  строки,  но  по  прежнему  будет  производится  поиск  последнего  вхождения.</p>
-</section>
-
-<section class="slide">
-  <h2>str_replace</h2>
-  <p>mixed str_replace (mixed $search, mixed $replace, mixed <span class="frame">$subject [, int &</span>$count ])</p>
-  <p class="minimize">Эта  функция  возвращает  строку  или  массив,  в  котором  все  вхождения  search  в  subject  заменены  на  replace.  Если  search  и  replace  —  массивы,  то  str_replace()  использует  каждое  значение  из  соответствующего  массива  для  поиска  и  замены  в  subject.  Если  в  массиве  replace  меньше  элементов,  чем  в  search,  в  качестве  строки  замены  для  оставшихся  значений  будет  использована  пустая  строка.  Если  search  —  массив,  а  replace  —  строка,  то  эта  строка  замены  будет  использована  для  каждого  элемента  массива  search. </p>
-</section>
-
-<section class="slide">
-  <h2>strlen/mb_strlen</h2>
-  <p>int strlen (string $string)<br>
-  mixed mb_strlen (string $str [, string $encoding = mb_internal_encoding() ])</p>
-  <p class="minimize">Возвращает  длину  строки  string.  mb_strlen()  Возвращает  FALSE,  если  передан  недопустимый  параметр  encoding.</p>
-</section>
-
-<section class="slide">
-  <h2>Полный  список функций для работы со строками</h2>
-  <a href="http://php.net/manual/ru/ref.strings.php">http://php.net/manual/ru/ref.strings.php</a>
-</section>
-
-<section class="slide schmutz-titel">
-  <img src="pic/2.lists.png" class="schmutz-picture" alt="">
-</section>
-
-<section class="slide chapter" id="lists">
-  <h2>Списки</h2>
-
-</section>
-
-<section class="slide">
-  <h2></h2>
-  <p class="subtitle">Список  —  это  ловкий  способ  сделать  несколько  присваиваний  за  один  раз</p>
-  <pre><code class="language-php">
-    $row = mysqli_fetch_row($link, $result);
-    list($id, $title) = $row; // $id = $row[0], $title = $row[1]
-  </code></pre>
-</section>
-
-<section class="slide schmutz-titel">
-  <img src="pic/3.massives.png" class="schmutz-picture" alt="">
-</section>
-
-<section class="slide chapter" id="massives">
-  <h2>Массивы</h2>
-</section>
-
-<section class="slide">
-  <h2>Объявление  массива</h2>
-  <ul>
-    <li>«Старый» способ</li>
-  </ul>
-  <pre><code class="language-php">
-    $eggs = array("egg1", "egg2", "egg3"); 
-    // $eggs[0] == "egg1", $eggs[1] == "egg2", etc...
-  </code></pre>
-  <ul>
-    <li>«Новый»  способ</li>
-  </ul>
-  <pre><code class="language-php">
-    $data = [10, 11, 3, 14, 8]; // $data[0] == 10, $data[1] == 11, etc...
-  </code></pre>
-</section>
-
-<section class="slide">
-  <ul>
-    <li>C  принудительным  присваиванием  ключей</li>
-  </ul>
-  <pre><code class="language-php">
-    $eggs = array(1 => "egg1", 2 => "egg2", 40 => "o_O");
-    $data = [100 =>2, 200 => 4];
-  </code></pre>
-  <ul>
-    <li>Ассоциативный  массив</li>
-  </ul>
-  <pre><code class="language-php">
-    $array = array("name" => "Виктор", "city" => "Москва");
-    echo $array['name']; // Виктор
-  </code></pre>
-</section>
-
-<section class="slide">
-  <h2>Работа  с  массивом</h2>
-  <ul>
-    <li>Добавление  элементов  в  массив</li>
-  </ul>
-  <pre><code class="language-php">
-    $eggs[] = "новое яйцо"; // ключ  назначается  автоматически
-    $eggs[99] = "уейн грецки"; //  принудительное  создание  элемента
-  </code></pre>
-  <ul>
-    <li>Удаление  элемента  из  массива</li>
-  </ul>
-  <pre><code class="language-php">
-    unset($eggs[99]); //  завершил  карьеру
-  </code></pre>
-</section>
-
-<section class="slide">
-  <h2>Обработка  в  цикле</h2>
-  <p class="answer"><span class="attention">важно!!</span> работает в том случае, если все индексы назначены автоматически и идут от нуля (поведение по умолчанию).</p>
-  <pre><code class="language-php line-numbers">
-    for ($i=0; $i < count($eggs); $i++) {
-    echo  $eggs[$i];
-  }
-  </code></pre>
-</section>
-
-<section class="slide">
-  <h2>Обработка ассоциативного массива<br> и массива с индексами не по порядку</h2>
-  <pre><code class="language-php line-numbers">
-    foreach($array as $k => $v) {
-    echo "Номер: {$k}, значение: $v";
-  }
-
-    $new_array = array();
-    foreach($array as $v) {
-        $new_array[] = $v; //"перепаковываем"  ключи  по  порядку от 0
-  }
-  </code></pre>
-</section>
-
-<section class="slide chapter-small">
-  <h2>Функции для преобразования строк в массивы</h2>
-</section>
-
-<section class="slide">
-  <h2>explode/implode</h2>
-  <p>array explode (string $delimiter, string $string [, int $limit ])</p>
-  <p class="minimize">Возвращает массив строк, полученных разбиением строки string с использованием delimiter в качестве разделителя. Если аргумент limit является положительным, возвращаемый массив будет содержать максимум limit элементов, при этом последний элемент будет содержать остаток строки string.</p>
-  <p>string implode (string $glue, array $pieces)<br>
-  string implode (array $pieces)</p>
-  <p class="minimize">Объединяет элементы массива с помощью строки glue.</p>
-</section>
-
-<section class="slide">
-  <h2>str_split</h2>
-  <p>array str_split (string $string [, int $split_length = 1 ])</p>
-  <p class="minimize">Преобразует строку в массив. Если указан необязательный аргумент split_length, возвращаемый массив будет содержать части исходной строки длиной split_length каждая, иначе каждый элемент будет содержать один символ. Если split_length меньше 1, возвращается FALSE. Если split_length больше длины строки string, то вся строка<br> будет возвращена в первом и единственном элементе массива.</p>
-</section>
-
-<section class="slide chapter-small">
-  <h2>Добавление / удаление элементов</h2>
-</section>
-
-<section class="slide">
-  <h2>array_fill</h2>
-  <p>array array_fill (int $start_index, int $num, mixed $value)</p>
-  <p class="minimize">Заполняет  массив  num  элементами  со  значением  value,  начиная  с  ключа  start_index.</p>
-  <p class="minimize">Если  start_index  отрицателен,  первым  индексом  возвращаемого  массива  будет  start_index,<br>  а  последующие  индексы  будут  начинаться  с  нуля.</p>
-</section>
-
-<section class="slide">
-  <h2>array_merge</h2>
-  <p>array array_merge (array $array1 [, array $... ])</p>
-  <p class="minimize">Сливает  элементы  одного  или  большего  количества  массивов  таким  образом,  что  значения  одного  массива  присоединяются  к  концу  предыдущего.  Результатом  работы  функции  является  новый  массив.Если  входные  массивы  имеют  одинаковые  строковые  ключи,<br>  тогда  каждое  последующее  значение  будет  заменять  предыдущее.  Однако,  если  массивы  имеют  одинаковые  числовые  ключи,  значение,  упомянутое  последним,  не  заменит  исходное  значение,  а  будет  добавлено  в  конец  массива.</p>
-</section>
-
-<section class="slide">
-  <h2>array_pad</h2>
-  <p>array array_pad (array $array, int $size, mixed $value)</p>
-  <p class="minimize">Функция  array_pad()  возвращает  копию  массива  array,  дополненного  до  размера  size  элементами  со  значением  value.  Если  параметр  size  положителен,  то  массив  увеличивается  вправо,  если  отрицателен  —  влево.  Если  абсолютное  значение  параметра  size  меньше<br>  или  равно  размеру  массива  array,  функция  не  производит  никаких  операций.  За  один  раз  возможно  добавить  максимум  1048576  элементов.</p>
-</section>
-
-<section class="slide">
-  <h2>array_pop</h2>
-  <p>mixed array_pop (array &$array)</p>
-  <p class="minimize">array_pop()  извлекает  и  возвращает  последнее  значение  параметра  array,  уменьшая  размер  array  на  один  элемент.</p>
-</section>
-
-<section class="slide">
-  <h2>array_shift</h2>
-  <p>mixed array_shift (array &$array)</p>
-  <p class="minimize">array_shift()  извлекает  первое  значение  массива  array  и  возвращает  его,  сокращая  размер  array  на  один  элемент.  Все  числовые  ключи  будут  изменены  таким  образом,  что  нумерация  массива  начнётся  с  нуля,  в  то  время  как  строковые  ключи  останутся  прежними.</p>
-</section>
-
-<section class="slide">
-  <h2>array_push</h2>
-  <p>int array_push (array &$array, mixed $value1 [, mixed $... ])</p>
-  <p class="minimize">array_push()  использует  array  как  стек,  и  добавляет  переданные  значения  в  конец  массива  array.  Длина  array  увеличивается  на  количество  переданных  значений.  Имеет  тот  же  эффект,  что  и  выражение: <mark class="highlighter">$array[] = $var;</mark> повторенное  для  каждого  переданного  значения. </p>
-</section>
-
-<section class="slide">
-  <h2>array_unshift</h2>
-  <p>int array_unshift (array &$array, mixed $value1 [, mixed $... ])</p>
-  <p class="minimize">array_unshift()  добавляет  переданные  в  качестве  аргументов  элементы  в  начало  массива  array.  Обратите  внимание,  что  список  элементов  добавляется  целиком,  то  есть  порядок  элементов  сохраняется.  Все  числовые  ключи  будут  изменены  таким  образом,  что  нумерация  массива  будет  начинаться  с  нуля,  в  то  время  как  строковые  ключи  останутся  прежними.</p>
-</section>
-
-<section class="slide chapter-small">
-  <h2>Функции для сортировки массивов</h2>
-</section>
-
-<section class="slide">
-  <h2>sort/rsort</h2>
-  <p>bool sort (array &$array [, int $sort_flags = SORT_REGULAR ])</p>
-  <p class="minimize">Эта  функция  сортирует  массив.  После  завершения  работы  функции  элементы  массива  будут  расположены  в  порядке  возрастания.  Дополнительный  второй  параметр  sort_flags  можно  использовать  для  изменения  поведения  сортировки.
-</p>
-  <p>bool rsort (array &$array [, int $sort_flags = SORT_REGULAR ])</p>
-  <p class="minimize">Эта  функция  сортирует  массив  в  обратном  порядке  (от  большего  к  меньшему).</p>
-</section>
-
-<section class="slide">
-  <h2>asort/arsort</h2>
-  <p>bool asort (array &$array [, int $sort_flags = SORT_REGULAR ])</p>
-  <p class="minimize">Эта  функция  сортирует  массив  таким  образом,  что  сохраняются  отношения  между  ключами<br>  и  значениями.  Она  полезна,  в  основном,  при  сортировке  ассоциативных  массивов,<br>  когда  важно  сохранить  отношение  ключ  =>  значение.</p>
-  <p>bool arsort (array &$array [, int $sort_flags = SORT_REGULAR ])</p>
-  <p class="minimize">Эта  функция  сортирует  массив  в  обратном  порядке  таким  образом,  что  сохраняются  отношения  между  ключами  и  значениями.</p>
-</section>
-
-<section class="slide">
-  <h2>ksort/krsort</h2>
-  <p>bool ksort (array &$array [, int $sort_flags = SORT_REGULAR ])</p>
-  <p class="minimize">Сортирует  массив  по  ключам,  сохраняя  отношения  между  ключами  и  значениями.<br>  Эта  функция  полезна,  в  основном,  для  работы  с  ассоциативными  массивами.</p>
-  <p>bool krsort (array &$array [, int $sort_flags = SORT_REGULAR ])</p>
-  <p class="minimize">Сортирует  массив  по  ключам  в  обратном  порядке,  сохраняя  отношения  между  ключами<br>  и  значениями.  Эта  функция  полезна,  в  основном,  для  работы  с  ассоциативными  массивами. </p>
-</section>
-
-<section class="slide chapter-small">
-  <h2>Функции для поиска в массиве</h2>
-</section>
-
-<section class="slide">
-  <h2>in_array</h2>
-  <p>bool in_array (mixed $needle , array $haystack [, bool $strict = FALSE ])</p>
-  <p class="minimize">Ищет  в  haystack  значение  needle.  Если  strict  не  установлен,  то  при  поиске<br>  будет  использовано  нестрогое  сравнение.</p>
-</section>
-
-<section class="slide">
-  <h2>array_search</h2>
-  <p>mixed array_search (mixed $needle, array $haystack [, bool $strict = false ])</p>
-  <p class="minimize">Осуществляет  поиск  данного  значения  в  массиве  и  возвращает  соответствующий  ключ<br>  в  случае  удачи. Эта  функция  может  возвращать  как  boolean  FALSE,  так  и  не-boolean  значение  (ключ),  которое  приводится  к  FALSE.</p>
-</section>
-
-<section class="slide">
-  <h2>array_key_exists</h2>
-  <p>bool array_key_exists (mixed $key, array $array)</p>
-  <p class="minimize">Функция  array_key_exists()  возвращает  TRUE,  если  в  массиве  присутствует  указанный  ключ  key.  Параметр  key  может  быть  любым  значением,  которое  подходит  для  индекса  массива.</p>
-</section>
-
-<section class="slide chapter-small">
-  <h2>Подсчет элементов в массиве</h2>
-</section>
-
-<section class="slide">
-  <h2>count</h2>
-  <p>int count (mixed $array_or_countable [, int $mode = COUNT_NORMAL ])</p>
-  <p class="minimize">Подсчитывает  количество  элементов  массива. Если  необязательный  параметр  mode  установлен  в  COUNT_RECURSIVE  (или  1),  count()  будет  рекурсивно  подсчитывать  количество  элементов  массива.  Это  полезно  для  подсчёта  всех  элементов  многомерных  массивов.</p>
-</section>
-
-<section class="slide">
-  <h2>array_sum/array_product</h2>
-  <p>number array_sum (array $array)</p>
-  <p class="minimize">array_sum() возвращает  сумму  значений  массива.</p>
-  <p>number array_product (array $array)</p>
-  <p class="minimize">array_product()  возвращает  произведение  значений  массива. </p>
-</section>
-
-<section class="slide chapter-small">
-  <h2>Функции для сравнения массивов</h2>
-</section>
-
-<section class="slide">
-  <h2>array_diff</h2>
-  <p>array array_diff (array $array1, array $array2 [, array $... ])</p>
-  <p class="minimize">Сравнивает  array1  с  одним  или  несколькими  другими  массивами  и  возвращает  значения  из  array1,  которые  отсутствуют  во  всех  других  массивах.</p>
-  <pre><code class="language-php line-numbers">
-    $array1  =  array("a"  =>  "green",  "red",  "blue",  "red");
-    $array2  =  array("b"  =>  "green",  "yellow",  "red");
-    $result  =  array_diff($array1,  $array2);
-    // Array([1]  =>  blue)
-  </code></pre>
-</section>
-
-<section class="slide">
-  <h2>array_intersect</h2>
-  <p>array array_intersect (array $array1, array $array2 [, array $... ])</p>
-  <p class="minimize">Функция  array_intersect()  возвращает  массив,  содержащий  все  значения  массива  array1,  которые  содержатся  во  всех  аргументах.  Обратите  внимание,  что  ключи  сохраняются.</p>
-</section>
-
-<section class="slide chapter-small">
-  <h2>Функции для преобразования массивов</h2>
-</section>
-
-<section class="slide">
-  <h2>array_flip</h2>
-  <p>array array_flip (array $array)</p>
-  <p class="minimize">Функция  array_flip()  возвращает  array  наоборот,  то  есть  ключи  массива  array  становятся  значениями,  а  значения  массива  array  становятся  ключами.</p>
-  <p class="minimize">Обратите  внимание,  что  значения  массива  array  должны  быть  корректными  ключами,<br>  то  есть  они  должны  иметь  тип  integer  или  string.  Если  значение  имеет  неверный  тип,<br>  будет  выдано  предупреждение  и  данная  пара  ключ/значение  не  будет  включена  в  результат.</p>
-</section>
-
-<section class="slide">
-  <h2>array_keys</h2>
-  <p>array array_keys (array $array [, mixed $search_value [, bool $strict = false ]] )</p>
-  <p class="minimize">Функция  array_keys()  возвращает  числовые  и  строковые  ключи,  содержащиеся  в  массиве  array.</p>
-  <p class="minimize">Если  указан  необязательный  параметр  search_value,  функция  возвращает  только  ключи,  совпадающие  с  этим  параметром.  В  обратном  случае,  функция  возвращает  все  ключи  массива  array.</p>
-</section>
-
-<section class="slide">
-  <h2>array_chunk</h2>
-  <p>array array_chunk (array $array, int $size [, bool $preserve_keys = false ])</p>
-  <p class="minimize">Разбивает  массив  на  несколько  массивов  размером  в  size  элементов.  Последний  массив<br>  из  полученных  может  содержать  меньшее  количество  значений,  чем  указано  в  size.<br>  Если  size  меньше  1,  будет  сгенерирована  ошибка  уровня  E_WARNING  и  возвращен  NULL. </p>
-</section>
-
-<section class="slide schmutz-titel">
-  <img src="pic/3.multidimentional-massive.png" class="schmutz-picture" alt="">
-</section>
-
-<section class="slide chapter" id="multidimentional-massive">
-  <h2>Многомерный массив</h2>
-</section>
-
-<section class="slide">
-  <h2></h2>
-  <h3 class="subtitle">Многомерный  массив — это</h3>
-  <p class="answer">массив,  в  котором  значениями  являются  также  массивы.</p>
-  <pre><code class="language-php line-numbers">
-    $a = array(
-      array("Москва", "Санкт-Петербург", "Нижний  Новгород"),
-      array("Берлин", "Франкфурт", "Мюнхен"),
-      array("Париж", "Марсель")
-    );
-
-    echo $a[1][2]; // Мюнхен
-  </code></pre>
-</section>
-
-<section class="slide">
-  <h2></h2>
-  <h3 class="subtitle">Многомерный  ассоциативный  массив</h3>
-  <p class="answer">Ключи  многомерного  массива  также  могут  быть  заданы</p>
-  <pre><code class="language-php line-numbers">
-    $a = array(
-      "Россия" => array("Москва", "Санкт-Петербург", 6 => "Нижний  Новгород"),
-      "Германия" => array("Берлин", 3 => "Франкфурт", 1 => "Мюнхен"),
-      "Франция" => array("Париж", "Марсель")
-    );
-
-    echo $a["Россия"][6]; // Н. Новгород
-  </code></pre>
-</section>
-
-<section class="slide">
-  <h2>Обработка  многомерного  массива</h2>
-  <ul>
-    <li>Вложенные  циклы</li>
-  </ul>
-  <pre><code class="language-php line-numbers">
-    foreach($a as $k => $v) {
-        $country = $k; // страна — ключ
-        foreach($v as $city) {
-            // в $city будут попадать города
-        }
+    <ul>
+      <li>«Новый»  способ</li>
+    </ul>
+    <pre><code class="language-php">
+      $data = [10, 11, 3, 14, 8]; // $data[0] == 10, $data[1] == 11, etc...
+    </code></pre>
+  </section>
+
+  <section class="slide">
+    <ul>
+      <li>C  принудительным  присваиванием  ключей</li>
+    </ul>
+    <pre><code class="language-php">
+      $eggs = array(1 => "egg1", 2 => "egg2", 40 => "o_O");
+      $data = [100 =>2, 200 => 4];
+    </code></pre>
+    <ul>
+      <li>Ассоциативный  массив</li>
+    </ul>
+    <pre><code class="language-php">
+      $array = array("name" => "Виктор", "city" => "Москва");
+      echo $array['name']; // Виктор
+    </code></pre>
+  </section>
+
+  <section class="slide">
+    <h2>Работа  с  массивом</h2>
+    <ul>
+      <li>Добавление  элементов  в  массив</li>
+    </ul>
+    <pre><code class="language-php">
+      $eggs[] = "новое яйцо"; // ключ  назначается  автоматически
+      $eggs[99] = "уейн грецки"; //  принудительное  создание  элемента
+    </code></pre>
+    <ul>
+      <li>Удаление  элемента  из  массива</li>
+    </ul>
+    <pre><code class="language-php">
+      unset($eggs[99]); //  завершил  карьеру
+    </code></pre>
+  </section>
+
+  <section class="slide">
+    <h2>Обработка  в  цикле</h2>
+    <p class="answer"><span class="attention">важно!!</span> работает в том случае, если все индексы назначены автоматически и идут от нуля (поведение по умолчанию).</p>
+    <pre><code class="language-php line-numbers">
+      for ($i=0; $i < count($eggs); $i++) {
+      echo  $eggs[$i];
     }
-  </code></pre>
-</section>
+    </code></pre>
+  </section>
 
-<section class="slide">
-  <h2></h2>
-  <ul>
-    <li>Если  индексы  многомерного  массива  (и  всех  внутренних  элементов)  идут  по  порядку,  то</li>
-  </ul>
-  <pre><code class="language-php line-numbers">
-    for($i = 0; $i < count($a); $i++) {
-        $row = $a[$i];
-        for($j = 0; $j < count($row); $j++) {
-            $item = $row[$j];
-        }
+  <section class="slide">
+    <h2>Обработка ассоциативного массива<br> и массива с индексами не по порядку</h2>
+    <pre><code class="language-php line-numbers">
+      foreach($array as $k => $v) {
+      echo "Номер: {$k}, значение: $v";
     }
-  </code></pre>
-</section>
 
-<section class="slide">
-  <h2>array_column</h2>
-  <p>array array_column (array $input, mixed $column_key [, mixed $index_key = null ])</p>
-  <p class="minimize">Берет  данные  из  одной  колонки  многомерного  массива  и  формирует  из  них  одномерный  массив.</p>
-  <p class="minimize">В  качестве  индексов  итогового  массива  могут  использоваться  данные  из  колонки,  указанной  в  третьем  параметре.</p>
-</section>
-
-<section class="slide schmutz-titel">
-  <img src="pic/4.null.png" class="schmutz-picture" alt="">
-</section>
-
-<section class="slide chapter" id="null">
-  <h2>NULL</h2>
-</section>
-
-<section class="slide">
-  <h2></h2>
-  <h3 class="subtitle">NULL — это</h3>
-  <p class="answer">значение для отражения состояния переменной без какого-либо значения, не установленной, не объявленной, удаленной и т.п.</p>
-  <p>Это единственное возможное значение типа данных null.</p>
-</section>
-
-<section class="slide">
-  <h2>null</h2>
-  <p>Переменная считается null, если:</p>
-  <ul>
-    <li>ей была присвоена соответствующая константа (NULL)</li>
-    <li>ей еще не было присвоено никакого значения</li>
-    <li>она была удалена с помощью unset</li>
-  </ul>
-  <p>NULL — хороший способ сообщить о том, что что-то пошло не так.</p>
-</section>
-
-<section class="slide schmutz-titel">
-  <img src="pic/5.resourses.jpg" class="schmutz-picture" alt="">
-</section>
-
-<section class="slide chapter" id="resourses">
-  <h2>Ресурсы</h2>
-</section>
-
-<section class="slide">
-  <h2></h2>
-  <h3 class="subtitle">Ресурсы — это</h3>
-  <p class="answer">специальный тип данных, содержащий в себе указатель на внешний ресурс (открытый файл, соединение с БД, картинку и т.п.)</p>
-  <p>В своих приложениях мы получаем ресурсы как результаты тех или иных функций, записываем их в переменную, и затем используем<br> эту переменную, когда требуется обращение к внешним данным.</p>
-  <p class="minimize"></p>
-</section>
-
-<section class="slide">
-  <h2>Получаем и используем ресурсы</h2>
-  <pre><code class="language-php line-numbers">
-    try {
-      $dbh = new PDO($dsn, $user, $password);
-    } catch (PDOException $e) {
-      echo 'Подключение не удалось: ' . $e->getMessage();
+      $new_array = array();
+      foreach($array as $v) {
+          $new_array[] = $v; //"перепаковываем"  ключи  по  порядку от 0
     }
-    $sth = $dbh->prepare("SELECT name, colour FROM fruit");
-    $sth->execute();
-    $result = $sth->fetch(PDO::FETCH_ASSOC);
-    print_r($result);
-    print("\n");
-  </code></pre>
-</section>
+    </code></pre>
+  </section>
 
-<section class="slide">
-  <h2>В будущих лекциях ресурсы<br> будут рассмотрены подробнее</h2>
-  <h3 class="subtitle"></h3>
-  <p>Список ресурсов (для смелых): <a href="http://php.net/manual/ru/resource.php">http://php.net/manual/ru/resource.php</a></p>
-</section>
+  <section class="slide chapter-small">
+    <h2>Функции для преобразования строк в массивы</h2>
+  </section>
 
-<section class="slide last">
+  <section class="slide">
+    <h2>explode/implode</h2>
+    <p>array explode (string $delimiter, string $string [, int $limit ])</p>
+    <p class="minimize">Возвращает массив строк, полученных разбиением строки string с использованием delimiter в качестве разделителя. Если аргумент limit является положительным, возвращаемый массив будет содержать максимум limit элементов, при этом последний элемент будет содержать остаток строки string.</p>
+    <p>string implode (string $glue, array $pieces)<br>
+    string implode (array $pieces)</p>
+    <p class="minimize">Объединяет элементы массива с помощью строки glue.</p>
+  </section>
+
+  <section class="slide">
+    <h2>str_split</h2>
+    <p>array str_split (string $string [, int $split_length = 1 ])</p>
+    <p class="minimize">Преобразует строку в массив. Если указан необязательный аргумент split_length, возвращаемый массив будет содержать части исходной строки длиной split_length каждая, иначе каждый элемент будет содержать один символ. Если split_length меньше 1, возвращается FALSE. Если split_length больше длины строки string, то вся строка<br> будет возвращена в первом и единственном элементе массива.</p>
+  </section>
+
+  <section class="slide chapter-small">
+    <h2>Добавление / удаление элементов</h2>
+  </section>
+
+  <section class="slide">
+    <h2>array_fill</h2>
+    <p>array array_fill (int $start_index, int $num, mixed $value)</p>
+    <p class="minimize">Заполняет  массив  num  элементами  со  значением  value,  начиная  с  ключа  start_index.</p>
+    <p class="minimize">Если  start_index  отрицателен,  первым  индексом  возвращаемого  массива  будет  start_index,<br>  а  последующие  индексы  будут  начинаться  с  нуля.</p>
+  </section>
+
+  <section class="slide">
+    <h2>array_merge</h2>
+    <p>array array_merge (array $array1 [, array $... ])</p>
+    <p class="minimize">Сливает  элементы  одного  или  большего  количества  массивов  таким  образом,  что  значения  одного  массива  присоединяются  к  концу  предыдущего.  Результатом  работы  функции  является  новый  массив.Если  входные  массивы  имеют  одинаковые  строковые  ключи,<br>  тогда  каждое  последующее  значение  будет  заменять  предыдущее.  Однако,  если  массивы  имеют  одинаковые  числовые  ключи,  значение,  упомянутое  последним,  не  заменит  исходное  значение,  а  будет  добавлено  в  конец  массива.</p>
+  </section>
+
+  <section class="slide">
+    <h2>array_pad</h2>
+    <p>array array_pad (array $array, int $size, mixed $value)</p>
+    <p class="minimize">Функция  array_pad()  возвращает  копию  массива  array,  дополненного  до  размера  size  элементами  со  значением  value.  Если  параметр  size  положителен,  то  массив  увеличивается  вправо,  если  отрицателен  —  влево.  Если  абсолютное  значение  параметра  size  меньше<br>  или  равно  размеру  массива  array,  функция  не  производит  никаких  операций.  За  один  раз  возможно  добавить  максимум  1048576  элементов.</p>
+  </section>
+
+  <section class="slide">
+    <h2>array_pop</h2>
+    <p>mixed array_pop (array &$array)</p>
+    <p class="minimize">array_pop()  извлекает  и  возвращает  последнее  значение  параметра  array,  уменьшая  размер  array  на  один  элемент.</p>
+  </section>
+
+  <section class="slide">
+    <h2>array_shift</h2>
+    <p>mixed array_shift (array &$array)</p>
+    <p class="minimize">array_shift()  извлекает  первое  значение  массива  array  и  возвращает  его,  сокращая  размер  array  на  один  элемент.  Все  числовые  ключи  будут  изменены  таким  образом,  что  нумерация  массива  начнётся  с  нуля,  в  то  время  как  строковые  ключи  останутся  прежними.</p>
+  </section>
+
+  <section class="slide">
+    <h2>array_push</h2>
+    <p>int array_push (array &$array, mixed $value1 [, mixed $... ])</p>
+    <p class="minimize">array_push()  использует  array  как  стек,  и  добавляет  переданные  значения  в  конец  массива  array.  Длина  array  увеличивается  на  количество  переданных  значений.  Имеет  тот  же  эффект,  что  и  выражение: <mark class="highlighter">$array[] = $var;</mark> повторенное  для  каждого  переданного  значения. </p>
+  </section>
+
+  <section class="slide">
+    <h2>array_unshift</h2>
+    <p>int array_unshift (array &$array, mixed $value1 [, mixed $... ])</p>
+    <p class="minimize">array_unshift()  добавляет  переданные  в  качестве  аргументов  элементы  в  начало  массива  array.  Обратите  внимание,  что  список  элементов  добавляется  целиком,  то  есть  порядок  элементов  сохраняется.  Все  числовые  ключи  будут  изменены  таким  образом,  что  нумерация  массива  будет  начинаться  с  нуля,  в  то  время  как  строковые  ключи  останутся  прежними.</p>
+  </section>
+
+  <section class="slide chapter-small">
+    <h2>Функции для сортировки массивов</h2>
+  </section>
+
+  <section class="slide">
+    <h2>sort/rsort</h2>
+    <p>bool sort (array &$array [, int $sort_flags = SORT_REGULAR ])</p>
+    <p class="minimize">Эта  функция  сортирует  массив.  После  завершения  работы  функции  элементы  массива  будут  расположены  в  порядке  возрастания.  Дополнительный  второй  параметр  sort_flags  можно  использовать  для  изменения  поведения  сортировки.
+  </p>
+    <p>bool rsort (array &$array [, int $sort_flags = SORT_REGULAR ])</p>
+    <p class="minimize">Эта  функция  сортирует  массив  в  обратном  порядке  (от  большего  к  меньшему).</p>
+  </section>
+
+  <section class="slide">
+    <h2>asort/arsort</h2>
+    <p>bool asort (array &$array [, int $sort_flags = SORT_REGULAR ])</p>
+    <p class="minimize">Эта  функция  сортирует  массив  таким  образом,  что  сохраняются  отношения  между  ключами<br>  и  значениями.  Она  полезна,  в  основном,  при  сортировке  ассоциативных  массивов,<br>  когда  важно  сохранить  отношение  ключ  =>  значение.</p>
+    <p>bool arsort (array &$array [, int $sort_flags = SORT_REGULAR ])</p>
+    <p class="minimize">Эта  функция  сортирует  массив  в  обратном  порядке  таким  образом,  что  сохраняются  отношения  между  ключами  и  значениями.</p>
+  </section>
+
+  <section class="slide">
+    <h2>ksort/krsort</h2>
+    <p>bool ksort (array &$array [, int $sort_flags = SORT_REGULAR ])</p>
+    <p class="minimize">Сортирует  массив  по  ключам,  сохраняя  отношения  между  ключами  и  значениями.<br>  Эта  функция  полезна,  в  основном,  для  работы  с  ассоциативными  массивами.</p>
+    <p>bool krsort (array &$array [, int $sort_flags = SORT_REGULAR ])</p>
+    <p class="minimize">Сортирует  массив  по  ключам  в  обратном  порядке,  сохраняя  отношения  между  ключами<br>  и  значениями.  Эта  функция  полезна,  в  основном,  для  работы  с  ассоциативными  массивами. </p>
+  </section>
+
+  <section class="slide chapter-small">
+    <h2>Функции для поиска в массиве</h2>
+  </section>
+
+  <section class="slide">
+    <h2>in_array</h2>
+    <p>bool in_array (mixed $needle , array $haystack [, bool $strict = FALSE ])</p>
+    <p class="minimize">Ищет  в  haystack  значение  needle.  Если  strict  не  установлен,  то  при  поиске<br>  будет  использовано  нестрогое  сравнение.</p>
+  </section>
+
+  <section class="slide">
+    <h2>array_search</h2>
+    <p>mixed array_search (mixed $needle, array $haystack [, bool $strict = false ])</p>
+    <p class="minimize">Осуществляет  поиск  данного  значения  в  массиве  и  возвращает  соответствующий  ключ<br>  в  случае  удачи. Эта  функция  может  возвращать  как  boolean  FALSE,  так  и  не-boolean  значение  (ключ),  которое  приводится  к  FALSE.</p>
+  </section>
+
+  <section class="slide">
+    <h2>array_key_exists</h2>
+    <p>bool array_key_exists (mixed $key, array $array)</p>
+    <p class="minimize">Функция  array_key_exists()  возвращает  TRUE,  если  в  массиве  присутствует  указанный  ключ  key.  Параметр  key  может  быть  любым  значением,  которое  подходит  для  индекса  массива.</p>
+  </section>
+
+  <section class="slide chapter-small">
+    <h2>Подсчет элементов в массиве</h2>
+  </section>
+
+  <section class="slide">
+    <h2>count</h2>
+    <p>int count (mixed $array_or_countable [, int $mode = COUNT_NORMAL ])</p>
+    <p class="minimize">Подсчитывает  количество  элементов  массива. Если  необязательный  параметр  mode  установлен  в  COUNT_RECURSIVE  (или  1),  count()  будет  рекурсивно  подсчитывать  количество  элементов  массива.  Это  полезно  для  подсчёта  всех  элементов  многомерных  массивов.</p>
+  </section>
+
+  <section class="slide">
+    <h2>array_sum/array_product</h2>
+    <p>number array_sum (array $array)</p>
+    <p class="minimize">array_sum() возвращает  сумму  значений  массива.</p>
+    <p>number array_product (array $array)</p>
+    <p class="minimize">array_product()  возвращает  произведение  значений  массива. </p>
+  </section>
+
+  <section class="slide chapter-small">
+    <h2>Функции для сравнения массивов</h2>
+  </section>
+
+  <section class="slide">
+    <h2>array_diff</h2>
+    <p>array array_diff (array $array1, array $array2 [, array $... ])</p>
+    <p class="minimize">Сравнивает  array1  с  одним  или  несколькими  другими  массивами  и  возвращает  значения  из  array1,  которые  отсутствуют  во  всех  других  массивах.</p>
+    <pre><code class="language-php line-numbers">
+      $array1  =  array("a"  =>  "green",  "red",  "blue",  "red");
+      $array2  =  array("b"  =>  "green",  "yellow",  "red");
+      $result  =  array_diff($array1,  $array2);
+      // Array([1]  =>  blue)
+    </code></pre>
+  </section>
+
+  <section class="slide">
+    <h2>array_intersect</h2>
+    <p>array array_intersect (array $array1, array $array2 [, array $... ])</p>
+    <p class="minimize">Функция  array_intersect()  возвращает  массив,  содержащий  все  значения  массива  array1,  которые  содержатся  во  всех  аргументах.  Обратите  внимание,  что  ключи  сохраняются.</p>
+  </section>
+
+  <section class="slide chapter-small">
+    <h2>Функции для преобразования массивов</h2>
+  </section>
+
+  <section class="slide">
+    <h2>array_flip</h2>
+    <p>array array_flip (array $array)</p>
+    <p class="minimize">Функция  array_flip()  возвращает  array  наоборот,  то  есть  ключи  массива  array  становятся  значениями,  а  значения  массива  array  становятся  ключами.</p>
+    <p class="minimize">Обратите  внимание,  что  значения  массива  array  должны  быть  корректными  ключами,<br>  то  есть  они  должны  иметь  тип  integer  или  string.  Если  значение  имеет  неверный  тип,<br>  будет  выдано  предупреждение  и  данная  пара  ключ/значение  не  будет  включена  в  результат.</p>
+  </section>
+
+  <section class="slide">
+    <h2>array_keys</h2>
+    <p>array array_keys (array $array [, mixed $search_value [, bool $strict = false ]] )</p>
+    <p class="minimize">Функция  array_keys()  возвращает  числовые  и  строковые  ключи,  содержащиеся  в  массиве  array.</p>
+    <p class="minimize">Если  указан  необязательный  параметр  search_value,  функция  возвращает  только  ключи,  совпадающие  с  этим  параметром.  В  обратном  случае,  функция  возвращает  все  ключи  массива  array.</p>
+  </section>
+
+  <section class="slide">
+    <h2>array_chunk</h2>
+    <p>array array_chunk (array $array, int $size [, bool $preserve_keys = false ])</p>
+    <p class="minimize">Разбивает  массив  на  несколько  массивов  размером  в  size  элементов.  Последний  массив<br>  из  полученных  может  содержать  меньшее  количество  значений,  чем  указано  в  size.<br>  Если  size  меньше  1,  будет  сгенерирована  ошибка  уровня  E_WARNING  и  возвращен  NULL. </p>
+  </section>
+
+  <section class="slide chapter" id="multidimentional-massive">
+    <h2>Многомерный массив</h2>
+  </section>
+
+  <section class="slide schmutz-titel">
+    <img src="pic/3.multidimentional-massive.png" class="schmutz-picture" alt="">
+  </section>
+
+  <section class="slide">
+    <h2></h2>
+    <h3 class="subtitle">Многомерный  массив — это</h3>
+    <p class="answer">массив,  в  котором  значениями  являются  также  массивы.</p>
+    <pre><code class="language-php line-numbers">
+      $a = array(
+        array("Москва", "Санкт-Петербург", "Нижний  Новгород"),
+        array("Берлин", "Франкфурт", "Мюнхен"),
+        array("Париж", "Марсель")
+      );
+
+      echo $a[1][2]; // Мюнхен
+    </code></pre>
+  </section>
+
+  <section class="slide">
+    <h2></h2>
+    <h3 class="subtitle">Многомерный  ассоциативный  массив</h3>
+    <p class="answer">Ключи  многомерного  массива  также  могут  быть  заданы</p>
+    <pre><code class="language-php line-numbers">
+      $a = array(
+        "Россия" => array("Москва", "Санкт-Петербург", 6 => "Нижний  Новгород"),
+        "Германия" => array("Берлин", 3 => "Франкфурт", 1 => "Мюнхен"),
+        "Франция" => array("Париж", "Марсель")
+      );
+
+      echo $a["Россия"][6]; // Н. Новгород
+    </code></pre>
+  </section>
+
+  <section class="slide">
+    <h2>Обработка  многомерного  массива</h2>
+    <ul>
+      <li>Вложенные  циклы</li>
+    </ul>
+    <pre><code class="language-php line-numbers">
+      foreach($a as $k => $v) {
+          $country = $k; // страна — ключ
+          foreach($v as $city) {
+              // в $city будут попадать города
+          }
+      }
+    </code></pre>
+  </section>
+
+  <section class="slide">
+    <h2></h2>
+    <ul>
+      <li>Если  индексы  многомерного  массива  (и  всех  внутренних  элементов)  идут  по  порядку,  то</li>
+    </ul>
+    <pre><code class="language-php line-numbers">
+      for($i = 0; $i < count($a); $i++) {
+          $row = $a[$i];
+          for($j = 0; $j < count($row); $j++) {
+              $item = $row[$j];
+          }
+      }
+    </code></pre>
+  </section>
+
+  <section class="slide">
+    <h2>array_column</h2>
+    <p>array array_column (array $input, mixed $column_key [, mixed $index_key = null ])</p>
+    <p class="minimize">Берет  данные  из  одной  колонки  многомерного  массива  и  формирует  из  них  одномерный  массив.</p>
+    <p class="minimize">В  качестве  индексов  итогового  массива  могут  использоваться  данные  из  колонки,  указанной  в  третьем  параметре.</p>
+  </section>
+
+  <section class="slide chapter" id="null">
+    <h2>NULL</h2>
+  </section>
+
+  <section class="slide schmutz-titel">
+    <img src="pic/4.null.png" class="schmutz-picture" alt="">
+  </section>
+
+  <section class="slide">
+    <h2></h2>
+    <h3 class="subtitle">NULL — это</h3>
+    <p class="answer">значение для отражения состояния переменной без какого-либо значения, не установленной, не объявленной, удаленной и т.п.</p>
+    <p>Это единственное возможное значение типа данных null.</p>
+  </section>
+
+  <section class="slide">
+    <h2>null</h2>
+    <p>Переменная считается null, если:</p>
+    <ul>
+      <li>ей была присвоена соответствующая константа (NULL)</li>
+      <li>ей еще не было присвоено никакого значения</li>
+      <li>она была удалена с помощью unset</li>
+    </ul>
+    <p>NULL — хороший способ сообщить о том, что что-то пошло не так.</p>
+  </section>
+
+  <section class="slide chapter" id="resourses">
+    <h2>Ресурсы</h2>
+  </section>
+
+  <section class="slide schmutz-titel">
+    <img src="pic/5.resourses.jpg" class="schmutz-picture" alt="">
+  </section>
+
+  <section class="slide">
+    <h2></h2>
+    <h3 class="subtitle">Ресурсы — это</h3>
+    <p class="answer">специальный тип данных, содержащий в себе указатель на внешний ресурс (открытый файл, соединение с БД, картинку и т.п.)</p>
+    <p>В своих приложениях мы получаем ресурсы как результаты тех или иных функций, записываем их в переменную, и затем используем<br> эту переменную, когда требуется обращение к внешним данным.</p>
+    <p class="minimize"></p>
+  </section>
+
+  <section class="slide">
+    <h2>Получаем и используем ресурсы</h2>
+    <pre><code class="language-php line-numbers">
+      try {
+        $dbh = new PDO($dsn, $user, $password);
+      } catch (PDOException $e) {
+        echo 'Подключение не удалось: ' . $e->getMessage();
+      }
+      $sth = $dbh->prepare("SELECT name, colour FROM fruit");
+      $sth->execute();
+      $result = $sth->fetch(PDO::FETCH_ASSOC);
+      print_r($result);
+      print("\n");
+    </code></pre>
+  </section>
+
+  <section class="slide">
+    <h2>В будущих лекциях ресурсы<br> будут рассмотрены подробнее</h2>
+    <h3 class="subtitle"></h3>
+    <p>Список ресурсов (для смелых): <a href="http://php.net/manual/ru/resource.php">http://php.net/manual/ru/resource.php</a></p>
+  </section>
+
+  <section class="slide last">
     <p class="thanx">Задавайте вопросы и напишите отзыв о лекции!</p>
     <address>Сергей Герасименко</address>
     <ul class="contacts">
